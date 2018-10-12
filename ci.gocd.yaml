@@ -1,0 +1,20 @@
+pipelines:
+  "gocd-yaml-plugin":
+    group: gocd
+    label_template: "${git[:8]}"
+    locking: off
+    materials:
+      git:
+        git: git@github.com:FranciscoSokol0000/cicd-demo.git
+    stages:
+    - build:
+        clean_workspace: true
+        artifacts:
+        - build:
+            source: build/libs/*.jar
+            destination: build/libs
+        tasks:
+        - exec:
+            command: ./gradlew
+            arguments:
+            - build
