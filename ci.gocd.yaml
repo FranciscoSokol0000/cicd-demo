@@ -1,5 +1,5 @@
 pipelines:
-  "gocd-yaml-plugin":
+  "cicd-demo":
     group: gocd
     label_template: "${git[:8]}"
     locking: off
@@ -18,3 +18,9 @@ pipelines:
             command: ./gradlew
             arguments:
             - build
+        - exec:
+            command: ./build.sh
+        - exec:
+            command: echo
+            arguments:
+              - "${GO_REVISION_GIT}"
